@@ -1,17 +1,26 @@
 import React from 'react';
 import './App.css';
 import ProfileCard from './Components/ProfileCard';
+import MatchCard from './Components/MatchCard';
 import axios from 'axios';
 
 
 function App() {
   const [profile, setProfile] = React.useState({});
   const [name, setName] = React.useState("Narfyy");
+  const [matches, setMatches] = React.useState([]);
   React.useEffect( () => {
     async function fetchProfile() {
       try {
         var res = await axios.get(`/profile/${name}`);
+        var puuid = res.data.puuid;
         setProfile(res.data);
+        try {
+          res = await axios.get(`/matches/${puuid}`);
+          setMatches(res.data);
+        }catch(err){
+          console.log(err)
+        }
       } catch(err) {
         console.log(err);
       }
@@ -29,6 +38,7 @@ function App() {
         crossOrigin="anonymous"
       />
       <ProfileCard profile={profile}></ProfileCard>
+      {matches.map( match => <MatchCard key={match.id} match={match}></MatchCard>)}
     </div>
   );
 }
