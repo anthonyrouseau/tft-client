@@ -4,6 +4,7 @@ import ProfileCard from './Components/ProfileCard';
 import MatchCard from './Components/MatchCard';
 import axios from 'axios';
 import SummonerSearch from './Components/SummonerSearch';
+import DataVis from './Components/DataVis';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         crossOrigin="anonymous"
       />
+      <DataVis matches={matches}/>
       <SummonerSearch setName={setName}/>
       <ProfileCard profile={profile}></ProfileCard>
       {matches.map( match => <MatchCard key={match.id} match={match}></MatchCard>)}
