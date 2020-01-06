@@ -8,7 +8,7 @@ function placement(n) {
     }
 }
 
-function cleanName(name) {
+export function CleanName(name) {
     let sep = name.split("_");
     return sep.length === 1 ? sep[0] : sep[1];
 }
@@ -41,18 +41,18 @@ export const PlacementCounts = (matches, options) => {
     }else{
         if(options.traits.length > 0 && options.units.length > 0){
             placements = matches.filter(match => {
-                let matchTraits = match.traits.map(trait => cleanName(trait.name));
-                let matchUnits = match.units.map(unit => cleanName(unit.character_id));
+                let matchTraits = match.traits.map(trait => CleanName(trait.name));
+                let matchUnits = match.units.map(unit => CleanName(unit.character_id));
                 return containsAll(matchTraits, options.traits) && containsAll(matchUnits, options.units)
             }).map(match => match.playerStats.placement);
         }else if(options.traits.length > 0){
             placements = matches.filter(match => {
-                let matchTraits = match.traits.map(trait => cleanName(trait.name));
+                let matchTraits = match.traits.map(trait => CleanName(trait.name));
                 return containsAll(matchTraits, options.traits)
             }).map(match => match.playerStats.placement);
         }else{
             placements = matches.filter(match => {
-                let matchUnits = match.units.map(unit => cleanName(unit.character_id));
+                let matchUnits = match.units.map(unit => CleanName(unit.character_id));
                 return containsAll(matchUnits, options.units)
             }).map(match => match.playerStats.placement);
         }
@@ -74,7 +74,7 @@ function formatData(countsObject) {
 
 export const TraitCounts = matches => {
     let traits = matches.reduce((traits, match) => {
-        return traits.concat(match.traits.map(trait => cleanName(trait.name)))
+        return traits.concat(match.traits.map(trait => CleanName(trait.name)))
     }, [])
     let traitCounts = Count(traits);
     return formatData(traitCounts);
@@ -82,7 +82,7 @@ export const TraitCounts = matches => {
 
 export const UnitCounts = matches => {
     let units = matches.reduce((units, match) => {
-        return units.concat(match.units.map(unit => cleanName(unit.character_id)))
+        return units.concat(match.units.map(unit => CleanName(unit.character_id)))
     }, [])
     let unitCounts = Count(units);
     return formatData(unitCounts)
@@ -97,10 +97,10 @@ function uniques(l){
 
 export const GetFilters = matches => {
     let unitSet = uniques(matches.reduce((allUnits, match) => {
-        return allUnits.concat(match.units.map(unit => cleanName(unit.character_id)))
+        return allUnits.concat(match.units.map(unit => CleanName(unit.character_id)))
     }, []));
     let traitSet = uniques(matches.reduce((allTraits, match) => {
-        return allTraits.concat(match.traits.map(trait => cleanName(trait.name)))
+        return allTraits.concat(match.traits.map(trait => CleanName(trait.name)))
     }, []));
     return {traits: traitSet.sort(), units: unitSet.sort()}
 }

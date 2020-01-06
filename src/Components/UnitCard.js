@@ -3,12 +3,13 @@ import Card from 'react-bootstrap/Card';
 import Accordion from 'react-bootstrap/Accordion';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Image from 'react-bootstrap/Image';
+import {CleanName} from '../DataHelpers';
 
 function UnitCard(props) {
     let unit = props.unit;
     return (
         <Card>
-            <Accordion.Toggle as={Card.Header} eventKey={props.id}>{unit.name}</Accordion.Toggle>
+            <Accordion.Toggle as={Card.Header} eventKey={props.id}>{CleanName(unit.character_id)}</Accordion.Toggle>
             <Accordion.Collapse eventKey={props.id}>
                 <Card.Body>
                     <ListGroup>

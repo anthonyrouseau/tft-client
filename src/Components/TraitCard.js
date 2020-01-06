@@ -2,13 +2,14 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Accordion from 'react-bootstrap/Accordion';
 import ListGroup from 'react-bootstrap/ListGroup';
+import {CleanName} from '../DataHelpers';
 
 function TraitCard(props) {
     let trait = props.trait;
     let weight = trait.tier_current > 0 ? "bold" : "normal";
     return (
         <Card>
-            <Accordion.Toggle as={Card.Header} eventKey={props.id} style={{fontWeight: weight}}>{trait.name}</Accordion.Toggle>
+            <Accordion.Toggle as={Card.Header} eventKey={props.id} style={{fontWeight: weight}}>{CleanName(trait.name)}</Accordion.Toggle>
             <Accordion.Collapse eventKey={props.id}>
                 <Card.Body>
                     <ListGroup>

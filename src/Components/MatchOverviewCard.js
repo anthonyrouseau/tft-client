@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import {CleanName} from '../DataHelpers';
 
 function TraitsView(props) {
     let match = props.match;
@@ -20,7 +21,7 @@ function TraitsView(props) {
                 <ListGroup>
                     <ListGroup.Item>
                         <Card.Text>Top Traits</Card.Text>
-                        <Card.Text>{match.traits.sort((a,b) => b.tier_current - a.tier_current).map(trait => trait.name).slice(0,3).join(', ')}</Card.Text>
+                        <Card.Text>{match.traits.sort((a,b) => b.tier_current - a.tier_current).map(trait => CleanName(trait.name)).slice(0,3).join(', ')}</Card.Text>
                     </ListGroup.Item>
                     <ListGroup.Item>
                         <Card.Text>Top Units</Card.Text>
