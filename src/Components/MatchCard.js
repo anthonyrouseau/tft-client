@@ -10,9 +10,9 @@ function MatchCard(props) {
     const [view, setView] = React.useState("");
     let match = props.match;
     function timeMinutes(s) {
-        let seconds = Math.round(s % 60);
+        let seconds = `0${Math.round(s % 60)}`;
         let minutes = Math.round(s/60);
-        return `${minutes}:${seconds}`
+        return `${minutes}:${seconds.slice(seconds.length-2)}`
     }
     function getView(view) {
         switch(view){
