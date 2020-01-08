@@ -9,7 +9,7 @@ function SummonerSearch(props) {
         e.preventDefault();
         let search = document.getElementById("summoner-search");
         if(search.value !== ""){
-            props.clearMatches();
+            props.clearData();
             props.setName(search.value);
         }
     }

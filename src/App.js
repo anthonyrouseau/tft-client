@@ -24,6 +24,7 @@ function App() {
         var res = await axios.get(`/profile/${name}`);
         var puuid = res.data.puuid;
         setProfile(res.data);
+        setError(null);
         try {
           res = await axios.get(`/matches/${puuid}`);
           document.getElementById("summoner-search").value = "";
@@ -39,8 +40,10 @@ function App() {
       fetchProfile();
     }
   }, [name])
-  function clearMatches(){
+
+  function clearData(){
     setMatches([]);
+    setProfile({})
   }
   return (
     <div className="App">
@@ -52,7 +55,7 @@ function App() {
       />
       {error && <ErrorAlert error={error}/>}
       <DataVis matches={matches}/>
-      <SummonerSearch setName={setName} clearMatches={clearMatches}/>
+      <SummonerSearch setName={setName} clearData={clearData}/>
       <ProfileCard profile={profile}></ProfileCard>
       {matches.map( match => <MatchCard key={match.id} match={match}></MatchCard>)}
     </div>
