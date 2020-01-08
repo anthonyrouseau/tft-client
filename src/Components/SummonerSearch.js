@@ -9,9 +9,9 @@ function SummonerSearch(props) {
         e.preventDefault();
         let search = document.getElementById("summoner-search");
         if(search.value !== ""){
+            props.clearMatches();
             props.setName(search.value);
         }
-        search.value = "";
     }
     return (
         <InputGroup className="mb-3">
